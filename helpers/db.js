@@ -3,6 +3,7 @@
  */
 const pgp = require('pg-promise')();
 const config = require("../config/" + (process.env.NODE_ENV || "dev") + ".js");
+const { logger } = require("./logger.js");
 
 
 /**
@@ -28,8 +29,9 @@ async function getDbData(args) {
       global.psql = await connectDB();
     }
     const db = global.psql;
-
-    return [{ enriched: true }];
+    let res = [{ enriched: true }];
+    logger.debug(res)
+    return res;
   } catch (error) {
     // logger.error(error);
     return [];

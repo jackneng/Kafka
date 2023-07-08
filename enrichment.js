@@ -1,6 +1,8 @@
 const { connectDB, getDbData } = require('./helpers/db.js');
 const { enrich } = require("./helpers/enrich.js");
 const { consumer, producer } = require("./helpers/kafka.js");
+const { logger } = require("./helpers/logger.js");
+
 const config = require("./config/" + (process.env.NODE_ENV || "dev") + ".js");
 const REGEX = /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/gm;
 
@@ -30,11 +32,11 @@ const enrichment = async () => {
             let dbData = await getDbData();
             enrichedData = await enrich(value, dbData)
             produce(topic, enrichedData)
-                .then(() => console.log("Message Enriched!"))
-                .catch(console.error)
+                .then(() => logger.info("Message Enriched!"))
+                .catch(logger.error)
         },
     })
 }
 
 // start consuming
-enrichment().catch(console.error)
+enrichment().catch(logger.error)

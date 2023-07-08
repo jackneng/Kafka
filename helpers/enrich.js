@@ -1,6 +1,7 @@
 /**
  * Helper Enrich functions
  */
+const { logger } = require("./logger.js");
 
 /**
  * Gather raw data and data from db to enrich Kafka data
@@ -12,7 +13,9 @@ const enrich = async (raw, dbdata) => {
     let enrichedData = {};
     Object.assign(enrichedData, raw);
     enrichedData.newData = dbdata;
-    return JSON.stringify(enrichedData);
+    let res = JSON.stringify(enrichedData);
+    logger.debug(res)
+    return res;
 }
 
 module.exports = {
