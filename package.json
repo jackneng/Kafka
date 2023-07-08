@@ -14,7 +14,10 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "kafkajs": "^2.2.4",
+    "lodash": "^4.17.21",
     "lz4": "^0.6.5",
-    "pg-promise": "^11.5.0"
+    "pg-promise": "^11.5.0",
+    "winston": "^3.9.0",
+    "winston-daily-rotate-file": "^4.7.1"
   }
 }

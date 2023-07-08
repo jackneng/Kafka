@@ -6,7 +6,7 @@ const { CompressionCodecs, CompressionTypes, Partitioners, Kafka } = KafkaJS;
 const fs = require('fs');
 const LZ4 = require('lz4');
 const config = require("../config/" + (process.env.NODE_ENV || "dev") + ".js");
-
+const { WinstonLogCreator } = require("./logger.js");
 
 /**
  * Set up LZ4 encoder/decoder for Kafka events
@@ -31,6 +31,7 @@ const kafkaConsumer = new Kafka({
     authenticationTimeout: 10000,
     reauthenticationThreshold: 10000,
     connectionTimeout: 10000,
+    logCreator: WinstonLogCreator,
 })
 const consumer = kafkaConsumer.consumer({ groupId: "enrichment-group" })
 
@@ -44,6 +45,7 @@ const kafkaProducer = new Kafka({
     authenticationTimeout: 10000,
     reauthenticationThreshold: 10000,
     connectionTimeout: 10000,
+    logCreator: WinstonLogCreator,
 })
 const producer = kafkaProducer.producer({
     createPartitioner: Partitioners.DefaultPartitioner,
