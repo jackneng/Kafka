@@ -10,12 +10,17 @@ const { logger } = require("./logger.js");
  * @returns Enriched Kafka data
  */
 const enrich = async (raw, dbdata) => {
-    let enrichedData = {};
-    Object.assign(enrichedData, raw);
-    enrichedData.newData = dbdata;
-    let res = JSON.stringify(enrichedData);
-    logger.debug(res)
-    return res;
+    try {
+        let enrichedData = {};
+        Object.assign(enrichedData, raw);
+        enrichedData.newData = dbdata;
+        let res = JSON.stringify(enrichedData);
+        logger.debug(res)
+        return res;
+    } catch (error) {
+        logger.error(error);
+        return raw;
+    }
 }
 
 module.exports = {

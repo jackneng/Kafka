@@ -33,7 +33,7 @@ async function getDbData(args) {
     logger.debug(res)
     return res;
   } catch (error) {
-    // logger.error(error);
+    logger.error(error);
     return [];
   }
 }
