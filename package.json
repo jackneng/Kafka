@@ -1,0 +1,20 @@
+{
+  "name": "kafka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:enrichment": "node enrichment.js",
+    "start:consumer": "node consumer.js",
+    "start:producer": "node producer.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "kafkajs": "^2.2.4",
+    "lz4": "^0.6.5",
+    "pg-promise": "^11.5.0"
+  }
+}
